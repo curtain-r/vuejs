@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="../js/vue.js"></script>
+    <style>
+        .inner {
+            height: 150px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click='divclick'>
+            <input type="button" value='点击' @click.stop='inputclick'>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            methods:{
+                divclick(){
+                    console.log('触发了div事件')
+                },
+                inputclick(){
+                    console.log('触发了button事件')
+                }
+            }
+        });
+      
+    </script>
+</body>
+</html>

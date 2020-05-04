@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯效果</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="浪" :title='lang' @click='l'>
+        <input type="button" value="低调" :title='didiao' @click='stop'>
+        <h4 v-text='mag'></h4>
+    </div>
+    <script>
+        let Vm = new Vue({
+            el:'#app',
+            data:{
+                mag:'猥琐发育别浪，我们能赢',
+                lang:'浪起来',
+                didiao: '低调',
+                Intervalid: null,
+            },
+            methods:{
+                l() {
+                    if (this.Intervalid != null) return;
+                    let Intervalid = setInterval(() => {
+                        let start = this.mag.substring(0,1);
+                        let end = this.mag.substring(1);
+                        this.mag = end + start;
+                    }, 500);  
+                },
+                stop(){
+                    clearInterval(this.Intervalid)
+                    this.Intervalid = null
+                }
+            }
+        })
+    </script>
+</body>
+</html>

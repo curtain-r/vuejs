@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200px;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .active {
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <h1 class="red thin">这是一个很大很大h1</h1> -->
+        <h1 :class="['red','thin', falg?'active':'']">我大我骄傲</h1>
+        <h1 :class='obj'>哈哈哈哈</h1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                falg: false,
+                obj: {
+                    red: true,
+                    thin: true,
+                    italic: false,
+                    active: false,
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

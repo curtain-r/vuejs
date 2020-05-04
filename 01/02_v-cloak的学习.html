@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-cloak的学习</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-cloak>{{ title }}</p>
+        <h4 v-text='title'></h4>
+        <p v-html='mag2'></p>
+        <h2>
+            v-text会覆盖元素里面原有的内容，
+            插值表达式只会替换自己的位置，但
+            是v-text没有闪烁问题。但是插值表
+            达式无法将HTML代码解析，v-html就
+            可以
+        </h2>
+        <input type="button" value='v-on:可以绑定事件' v-on:clickr='show'>
+        <!-- <input type="button", value='按钮' v-bind:title='mytitle'> -->
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                title:'v-cloak学习',
+                mag2:'<h1>v-html可以解析我。</h1>',
+                mytitle:'v-bind绑定到字符串里,简化操作可以简化为:',
+            },
+            methods:{
+                show:function(){
+                    alert('v-on:绑定事件')
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

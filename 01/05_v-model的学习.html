@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h4>{{mag}}</h4>
+        <input type="text" v-model="mag" style="width: 100%;"> 
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                mag:'你们都是好人，爱学习爱思考，爱钱',
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+</html>
