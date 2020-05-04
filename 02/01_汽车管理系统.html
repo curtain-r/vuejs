@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="addcar">
+            <label>
+                id:
+                <input type="text" v-model='Id'>
+            </label>
+            <label>
+                name:
+                <input type="text" v-model='Name' @keyup.enter='add'>
+            </label>
+            <label>
+                <input type="button" value="添加" @click='add'>
+            </label>
+            <label>
+                关键字搜索：
+                <input type="text" v-model='key' id='search' v-focus v-color>
+            </label>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>CarName</th>
+                    <th>Ctime</th>
+                    <th>del</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="car in search(key)" :key="car.id">
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.name }}</td>
+                    <td>{{ car.ctime | dateFormat('') }}</td>
+                    <td>
+                        <a href="" @click.prevent='del(car.id)'>删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // 全局过滤器，格式化时间
+        Vue.filter('dateFormat',function(datestr,pattern=''){
+            // 根据给定的时间字符串，得到特定时间
+            var dt = new Date(datestr)
+
+            // yyyy-mm-dd
+            var y = dt.getFullYear()
+            var m = dt.getMonth() + 1
+            var d = dt.getDate()
+
+            // return y + '-' + m + '-' + d
+            // `` 模板字符串
+            if(pattern && pattern.toLowerCase() === 'yyyy-mm-dd'){
+                return `${y}-${m}-${d}`
+            }else{
+                var hh = dt.getHours()
+                var mm = dt.getMinutes()
+                var ss = dt.getSeconds()
+
+                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            }
+            
+        })
+
+
+
+        // 指令的创建
+        vue.directive('color', {
+            bind: function(el){
+                el.style.color='red'
+            }
+        })
+        Vue.directive('focus',{
+            bind: function(el){   // 每当指令绑定到元素上是，会立即执行bind函数，只执行一次
+                // 注意： 在每个函数中，第一个参数永远是el， 表示被绑定了指令的那个元素，这个el参数是原生JS对象
+                // 在元素刚绑定了指令的时候，还没有插入到DOM中去，这时候调用focus()方法无效
+                // el.focus()
+            },
+            inserted: function(el){   // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数(触发一次)
+                el.focus()
+            },
+            updated: function(){    // 当vnode更新的时候，会执行 updated， 可多次触发
+
+            }
+        })
+      
+        
+
+        // Vue 对象
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                Id: '',
+                Name: '',
+                key: '',
+                cars: [{
+                        id: 1,
+                        name: '大奔',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 2,
+                        name: '奥迪',
+                        ctime: new Date()
+                    }
+                ]
+            },
+            methods: {
+                add(id){
+                    if (this.Id=='' || this.Name=='') {
+                        alert('请输入有效id和name')
+                    }
+                    else{
+                        this.cars.push({id: this.Id, name: this.Name, ctime: new Date()})
+                        this.Id = this.Name = ''
+                    }
+                },
+                del(id){
+                //     this.cars.some((car,i)=>{
+                //     if(car.id === id){
+                //         this.cars.splice(i,1)
+                //         return true
+                //     }
+                // })
+                var index = this.cars.findIndex(car =>{
+                    if (car.id==id){
+                        return true
+                    }
+                })
+                this.cars.splice(index,1)
+                
+            },
+                search(key){
+                    // var Newlist=[]
+                    // this.cars.forEach(car => {
+                    //     if (car.name.indexOf(key) != -1){
+                    //         Newlist.push(car)
+                    //     }
+                    // return Newlist   
+                    // });
+                    return this.cars.filter(car => {
+                        if (car.name.includes(key)){
+                            return car
+                        }
+                    })
+                }
+            },
+           
+        })
+        // 过滤器语法
+        // Vue.filter('过滤器名称',function(){})
+        // 过滤器参数一定是管道符(|)前的变量
+
+        // 原生js实现自动聚焦
+        // document.getElementById('search').focus()
+    </script>
+</body>
+
+</html>

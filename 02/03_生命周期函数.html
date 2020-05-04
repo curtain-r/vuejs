@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value='修改msg' @click="msg='No'">
+        <h3 id='h3'>{{ msg }}</h3>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'haha'
+            },
+            methods: {
+                show(){
+                    console.log('执行了show方法')
+                }
+            },
+            beforeCreate() {
+                // 这是第一个生命周期函数
+                // 在beforeCreate()中date和methods中的内容都没有被初始化
+                // console.log(this.msg)
+                // this.show()
+            },
+            created() {
+                // 这是第二个生命周期函数
+                // 可以调用methods中的方法和data中的数据
+            },
+            beforeMount() {
+                // 这是第三个生命周期函数，表示模板已经创建完毕，但是尚未把模板渲染到页面中去
+                // console.log(document.getElementById('h3').innerText)
+                alert('模板加载好了，但是还没有渲染到页面中来，点击确定它就渲染好了')
+            },
+            mounted() {
+                // 这是第四个生命周期函数，表示 内存中的模板已经真实的渲染到页面中，用户已经可以看到
+                // Mounted 是实例创建的最后一个生命周期函数
+            },
+            beforeUpdate() {
+                // 这是运行阶段的第一个生命周期函数
+                // 这时候界面没有被更新【数据已经被更行】
+                console.log(document.getElementById('h3').innerText)
+            },
+        })
+    </script>
+</body>
+</html>
