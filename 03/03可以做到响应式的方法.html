@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for='item in letters' :key='item'>{{item}}</li>
+    </ul>
+    <div>可以做到响应式的方法</div>
+    <button @click='pushMethod'>pushMethod</button>
+    <button @click='popMethod'>popMethod</button>
+    <button @click='shiftMethod'>shiftMethod</button>
+    <button @click='unshiftMethod'>unshiftMethod</button>
+    <button @click='spliceMethod'>spliceMethod</button>
+    <button @click='sortMethod'>sortMethod</button>
+    <button @click='reseverMethod'>reseverMethod</button>
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        letters: ['a', 'b', 'c', 'd']
+      },
+      methods: {
+        pushMethod() {
+          // 可以添加多个
+          this.letters.push('push');
+        },
+        popMethod() {
+          // 删除最后一个
+          this.letters.pop();
+        },
+        shiftMethod() {
+          // 删除第一个
+          this.letters.shift();
+        },
+        unshiftMethod() {
+          // 在数组最前面添加元素，可添加多个
+          this.letters.unshift('unshift');
+        },
+        spliceMethod() {
+          // splice: 删除元素/插入元素/替换元素
+          // splice(start，end)
+          this.letters.splice(1, 2)
+        },
+        sortMethod() {
+          // 排序
+          this.letters.sort()
+        },
+        reseverMethod() {
+          this.letters.resever()
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
