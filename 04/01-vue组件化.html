@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_初识vue</title>
+  <script src="../js/vue.js"></script>
+
+  <head>
+
+  <body>
+    <div id="app">
+      <mycpm></mycpm>
+      <mycpm></mycpm>
+      <mycpm></mycpm>
+      <mycpm></mycpm>
+    </div>
+    <script>
+      // 1. 创建组件构造对象
+      const cpnC = Vue.extend({
+        template: `
+            <div>
+              <h2>我是h2</h2>
+              <p>pppppp</p>
+              <p>wwifjdijafk</p>
+            </div>`
+      })
+      // 2. 注册组件
+      // Vue.component('组件的标签名','构建的组件')
+      Vue.component('mycpm', cpnC);
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'jdkfj',
+        }
+      })
+    </script>
+  </body>
+
+</html>
