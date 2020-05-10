@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script src="../js/vue.js"></script>
+
+  <head>
+
+  <body>
+    <div id="app">
+      <father></father>
+    </div>
+    <script>
+      // 1.创建第一个组件对象
+      const cpm1 = Vue.extend({
+        template: `
+        <p>我是儿子</p>
+        `
+      })
+
+      const cpm2 = Vue.extend({
+        template: `
+        <div>
+          <p>我是你爹</p>
+          <child></child>
+        </div>
+        `,
+        components: {
+          'child': cpm1,
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'jdkfj',
+        },
+        components: {
+          father: cpm2,
+        }
+      })
+    </script>
+  </body>
+
+</html>
