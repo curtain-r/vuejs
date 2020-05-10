@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script src="../js/vue.js"></script>
+
+  <head>
+
+  <body>
+    <div id="app">
+      <major></major>
+      <easy></easy>
+      <sweat></sweat>
+    </div>
+    <script>
+      // 1.普通注册全局组件
+      const cpm = Vue.extend({
+        template: `
+        <p>jdfkaj</p>
+        `
+      })
+      Vue.component('major', cpm)
+      // 2.语法糖注册全局组件
+      Vue.component('easy', {
+        template: `
+        <p>语法糖注册</p>
+        `
+      })
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'jdkfj',
+        },
+        // 3.语法糖注册局部组件
+        components: {
+          'sweat': {
+            template: `
+            <p>局部语法糖</P>
+            `
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>
