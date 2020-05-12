@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script src="../js/vue.js"></script>
+
+  <head>
+
+  <body>
+    <div id="app">
+      <h2>父到子用props方法，子到父用emit</h2>
+      <!-- 4.用v-bind：将父组件的数据绑定到props中的变量中去 -->
+      <cpn :cmsg='msg'></cpn>
+    </div>
+    <template id='cpn'>
+      <div>
+        <p>{{cmsg}}</p>
+        <p>{{cmovies}}</p>
+        <ul>
+          <li v-for='item in cmovies'>{{item}}</li>
+        </ul>
+      </div>
+    </template>
+    <script>
+      // 1.创建一个组件对象
+      const cpn = {
+        template: '#cpn',
+        // 3.用props给组件创建变量
+        // props: ['cmovies', 'cmsg'],数组写法
+
+        // props: {
+        //   comvies: Array,
+        //   cmsg: String,
+        // },对象写法,好处:类型限制
+
+        // 对象中对象，可以提供默认值
+        // 当默认值为对象或者数组时，必须使用工厂函数返回一个默认值
+        props: {
+          cmovies: {
+            type: Array,
+            default () {
+              return [1, 2, 3]
+            }
+          },
+          cmsg: {
+            type: String,
+            default: 'aaa',
+          }
+        },
+        data() {
+          return {}
+        },
+      }
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'jdkfj',
+          // movies: ['海王', 'jdk', 'jdadaf'] // 把这个数据传给子
+        },
+        // 2.初始化组件
+        components: {
+          cpn
+        }
+      })
+    </script>
+  </body>
+
+</html>
