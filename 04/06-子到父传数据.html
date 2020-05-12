@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <script src="../js/vue.js"></script>
+
+  <head>
+
+  <body>
+    <div id="app">
+      <h2>父组件中的counter: {{counter}}</h2>
+      <!--  父组件监听子组件的inc事件 和dec事件 -->
+      <cpn @inc='inc' @dec='dec'></cpn>
+    </div>
+
+    <template id='cpn'>
+      <div>
+        <h2>子组件中的counter: {{number}}</h2>
+        <button @click='inc'>+</button>
+        <button @click='dec'>-</button>
+      </div>
+    </template>
+    <script>
+      // 子组件
+      const cpn = {
+        template: '#cpn',
+        data() {
+          return {
+            number: 0
+          }
+        },
+        methods: {
+          inc() {
+            this.number++,
+              // 向父组件发送事件,事件名为:inc
+              this.$emit('inc')
+          },
+          dec() {
+            this.number--,
+              // 向父组件发送事件,事件名为:dec
+              this.$emit('dec')
+          },
+        }
+      }
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'jdkfj',
+          counter: 0,
+        },
+        components: {
+          cpn
+        },
+        methods: {
+          inc(item) {
+            this.counter++
+            console.log(item)
+          },
+          dec(item) {
+            this.counter--
+            console.log(item)
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>
