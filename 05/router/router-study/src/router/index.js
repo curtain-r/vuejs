@@ -9,21 +9,36 @@ Vue.use(VueRouter)
 // 2 创建路由映射表
 const routes = [{
     path: '/home',
-    component: Home
+    component: Home,
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/info/:id',
-    component: Info
+    component: Info,
+    meta: {
+      title: '信息'
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      title: '档案'
+    }
   }
 ]
 
 // 3 new 一个VueRouter实例
 const router = new VueRouter({
   routes
+})
+
+// 全局导航守卫(guard)
+router.beforeEach((to, from, next) => {
+  document.title = to.matched[0].meta.title
+  next()
 })
 
 // 4 将创建好的router 导出

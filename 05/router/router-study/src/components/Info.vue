@@ -11,6 +11,12 @@ export default {
     mname() {
       console.log(this.name);
     }
+  },
+  activated() {
+    console.log("The info is activated!");
+  },
+  deactivated() {
+    console.log("The info is deactivated");
   }
 };
 </script>

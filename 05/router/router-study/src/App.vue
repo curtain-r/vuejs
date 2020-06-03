@@ -5,7 +5,9 @@
     <router-link :to="{path: '/profile', query: {
       name: '赵文强',age: 18
     }}">ToProfile</router-link>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 <script>

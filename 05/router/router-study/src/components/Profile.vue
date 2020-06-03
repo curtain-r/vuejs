@@ -5,3 +5,14 @@
     <h3>{{this.$route.query.age}}</h3>
   </div>
 </template>
+<script>
+export default {
+  name: "Profile",
+  created() {
+    console.log("Profile is created!");
+  },
+  destroyed() {
+    console.log("profile is destroyed");
+  }
+};
+</script>
